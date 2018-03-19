@@ -9,6 +9,7 @@ import TPLink
 sp = TPLink.SmartPlug("username", "password")
 
 sp.PrintDevices()
+
 MyDeviceID = "your_device_id"
 
 state = sp.GetState(MyDeviceID)
