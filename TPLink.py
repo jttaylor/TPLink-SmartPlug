@@ -20,11 +20,6 @@ class SmartPlug:
          }
         }
 
-
-
-
-
-
     def GetToken(self):
         req = urllib2.Request('https://wap.tplinkcloud.com')
         req.add_header('Content-Type', 'application/json')
