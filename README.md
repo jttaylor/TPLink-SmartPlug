@@ -17,16 +17,14 @@ sp.PrintDevices()
 Get the device id from the json parameter "deviceId"
 
 
-Turn On/Off
+Turn a Smart Plug On/Off
 
 ```
 import TPLink
 
 sp = TPLink.SmartPlug("username", "password")
 
-MyDeviceID = "your_device_id"
-
-state = sp.GetState(MyDeviceID)
+state = sp.GetState("your_device_id")
 
 if (state == 0):
     sp.TurnOn(MyDeviceID)
