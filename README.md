@@ -2,7 +2,7 @@
 Python Class for controlling the Kasa TP-Link Smart Plug
 
 
-##Usage:
+## Usage:
 
 Get Device ID:
 
