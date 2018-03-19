@@ -4,6 +4,7 @@ Python Class for controlling the Kasa TP-Link Smart Plug
 
 Usage:
 
+```
 import TPLink
 
 sp = TPLink.SmartPlug("username", "password")
@@ -21,3 +22,4 @@ if (state == 0):
 else:
 
     sp.TurnOff(MyDeviceID)
+```
