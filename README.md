@@ -15,6 +15,9 @@ MyDeviceID = "your_device_id"
 state = sp.GetState(MyDeviceID)
 
 if (state == 0):
+
     sp.TurnOn(MyDeviceID)
+	
 else:
+
     sp.TurnOff(MyDeviceID)
