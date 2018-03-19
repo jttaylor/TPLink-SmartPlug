@@ -1,4 +1,4 @@
-# TPLink-SmartLink
+# TPLink-SmartPlug
 Python Class for controlling the Kasa TP-Link Smart Plug
 
 
