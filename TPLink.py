@@ -21,66 +21,81 @@ class SmartPlug:
         }
 
     def GetToken(self):
-        req = urllib2.Request('https://wap.tplinkcloud.com')
-        req.add_header('Content-Type', 'application/json')
+        try:
+            req = urllib2.Request('https://wap.tplinkcloud.com')
+            req.add_header('Content-Type', 'application/json')
 
-        response = urllib2.urlopen(req, json.dumps(self.login_req))
+            response = urllib2.urlopen(req, json.dumps(self.login_req))
 
-        txt = response.read()
-        jobj = json.loads(txt)
-        self.token = jobj["result"]["token"]
+            txt = response.read()
+            jobj = json.loads(txt)
+            self.token = jobj["result"]["token"]
+        except:
+            return
 
     def PrintDevices(self):
-        if self.token is None:
-            self.GetToken()
+        try:
+            if self.token is None:
+                self.GetToken()
 
-        getDeviceList_req = {"method": "getDeviceList" }
+            getDeviceList_req = {"method": "getDeviceList" }
 
-        url = 'https://wap.tplinkcloud.com?token=' + self.token
-        req = urllib2.Request(url)
-        req.add_header('Content-Type', 'application/json')
+            url = 'https://wap.tplinkcloud.com?token=' + self.token
+            req = urllib2.Request(url)
+            req.add_header('Content-Type', 'application/json')
 
-        response = urllib2.urlopen(req, json.dumps(getDeviceList_req))
-        print response.read()
+            response = urllib2.urlopen(req, json.dumps(getDeviceList_req))
+            print response.read()
+        except:
+            return
 
     def GetState(self, device_id):
-        if self.token is None:
-            self.GetToken()
+        try:
+            if self.token is None:
+                self.GetToken()
 
-        status_req =  {"method":"passthrough", "params": {"deviceId": device_id, "requestData": "{\"system\":{\"get_sysinfo\":{}}}" }}
+            status_req =  {"method":"passthrough", "params": {"deviceId": device_id, "requestData": "{\"system\":{\"get_sysinfo\":{}}}" }}
 
-        url = 'https://wap.tplinkcloud.com?token=' + self.token
-        req = urllib2.Request(url)
-        req.add_header('Content-Type', 'application/json')
+            url = 'https://wap.tplinkcloud.com?token=' + self.token
+            req = urllib2.Request(url)
+            req.add_header('Content-Type', 'application/json')
 
-        response = urllib2.urlopen(req, json.dumps(status_req))
-        txt = response.read()
-        jobj = json.loads(txt)
-        txt2 = jobj["result"]["responseData"]
-        jobj2 = json.loads(txt2)
-        return jobj2["system"]["get_sysinfo"]["relay_state"]
+            response = urllib2.urlopen(req, json.dumps(status_req))
+            txt = response.read()
+            jobj = json.loads(txt)
+            txt2 = jobj["result"]["responseData"]
+            jobj2 = json.loads(txt2)
+            return jobj2["system"]["get_sysinfo"]["relay_state"]
+        except:
+            return 0
 
     def TurnOn(self, device_id):
-        if self.token is None:
-            self.GetToken()
+        try:
+            if self.token is None:
+                self.GetToken()
 
-        turnOn_req = {"method":"passthrough", "params": {"deviceId": device_id, "requestData": "{\"system\":{\"set_relay_state\":{\"state\":1}}}" }}
+            turnOn_req = {"method":"passthrough", "params": {"deviceId": device_id, "requestData": "{\"system\":{\"set_relay_state\":{\"state\":1}}}" }}
 
-        url = 'https://wap.tplinkcloud.com?token=' + self.token
-        req = urllib2.Request(url)
-        req.add_header('Content-Type', 'application/json')
+            url = 'https://wap.tplinkcloud.com?token=' + self.token
+            req = urllib2.Request(url)
+            req.add_header('Content-Type', 'application/json')
 
-        response = urllib2.urlopen(req, json.dumps(turnOn_req))
+            response = urllib2.urlopen(req, json.dumps(turnOn_req))
+        except:
+            return
 
 
     def TurnOff(self, device_id):
-        if self.token is None:
-            self.GetToken()
+        try:
+            if self.token is None:
+                self.GetToken()
 
-        turnOff_req = {"method":"passthrough", "params": {"deviceId": device_id, "requestData": "{\"system\":{\"set_relay_state\":{\"state\":0}}}" }}
+            turnOff_req = {"method":"passthrough", "params": {"deviceId": device_id, "requestData": "{\"system\":{\"set_relay_state\":{\"state\":0}}}" }}
 
-        url = 'https://wap.tplinkcloud.com?token=' + self.token
-        req = urllib2.Request(url)
-        req.add_header('Content-Type', 'application/json')
+            url = 'https://wap.tplinkcloud.com?token=' + self.token
+            req = urllib2.Request(url)
+            req.add_header('Content-Type', 'application/json')
 
-        response = urllib2.urlopen(req, json.dumps(turnOff_req))
+            response = urllib2.urlopen(req, json.dumps(turnOff_req))
+        except:
+            return
